@@ -1,0 +1,52 @@
+<h3 class="title">Create Form</h3>
+<hr>
+
+<div class="content">
+
+    <form [formGroup]="createForm" (ngSubmit)="saveCourse()" class="horizontal-form">
+
+        <div class="form-group">
+            <label class="form-group__label" for="director">Director:</label>
+            <input class="form-group__input" type="text" id="director" formControlName="director">
+            <ng-container *ngTemplateOutlet="errorMessage;context:{control:'director'}"></ng-container>
+        </div>
+
+        <div class="form-group">
+            <label class="form-group__label" for="grade">Grade:</label>
+            <select class="form-group__input" id="grade" formControlName="grade">
+                <option disabled value=""> Choose an option </option>
+                <option *ngFor="let grade of grades" [value]="grade"> {{ grade }} </option>
+            </select>
+            <ng-container *ngTemplateOutlet="errorMessage;context:{control:'grade'}"></ng-container>
+        </div>
+
+        <div class="form-group">
+            <label class="form-group__label" for="subGroup">Subgroup:</label>
+            <select class="form-group__input" id="subGroup" formControlName="subGroup">
+                <option disabled value=""> Choose an option </option>
+                <option *ngFor="let subGroup of subgroups" [value]="subGroup"> {{ subGroup }} </option>
+            </select>
+            <ng-container *ngTemplateOutlet="errorMessage;context:{control:'subGroup'}"></ng-container>
+        </div>
+
+        <div class="form-group">
+            <label class="form-group__label" for="session">Session:</label>
+            <select class="form-group__input" id="session" formControlName="session">
+                <option disabled value=""> Choose an option </option>
+                <option *ngFor="let session of sessions" [value]="session"> {{ session }} </option>
+            </select>
+            <ng-container *ngTemplateOutlet="errorMessage;context:{control:'session'}"></ng-container>
+        </div>
+
+        <div class="form-group form-group--buttons">
+            <button class="btn btn-secondary" [routerLink]="['/courses']">Cancel</button>
+            <button class="btn btn-primary" type="submit" [disabled]="createForm.invalid">Save</button>
+        </div>
+
+    </form>
+
+</div>
+
+<ng-template #errorMessage let-control="control">
+    <small *ngIf="getValidation(control, 'required')" class="text-error">The "{{ control }}" field is required</small>
+</ng-template>

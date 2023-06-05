@@ -1,0 +1,19 @@
+<app-sidebar (onChangeSidebar)="sidebarOpen = $event"></app-sidebar>
+
+<section [ngClass]="{'container': sidebarOpen, 'container-small': !sidebarOpen}">
+  <app-header [sidebarIsOpen]="sidebarOpen"></app-header>
+  <main class="content">
+    <div class="analytics">
+      <app-analytics-card [value]="(courses | async )!.length" [percentage]="'30%'" [icon]="'las la-home'"
+        [color]="'primary'" [description]="'Approximate courses'">
+      </app-analytics-card>
+
+      <app-analytics-card [value]="(students | async )!.length" [percentage]="'10%'" [icon]="'las la-user-friends'"
+        [color]="'secondary'" [description]="'Number of students'">
+      </app-analytics-card>
+    </div>
+    <div class="childs">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</section>

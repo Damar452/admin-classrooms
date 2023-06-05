@@ -1,0 +1,10 @@
+<app-general-table 
+    [addButtonText]="'Add Course'" 
+    [data]="coursesList | async " 
+    [headers]="tableHeader"
+    [tableConfig]="{hasOptions: true, hasView: true, hasDelete: true}"
+    (onClickAdd)="addCourse()"
+    (onClickView)="viewCourse($event)"
+    (onClickDelete)="removeCourse($event)"
+>
+</app-general-table>

@@ -1,0 +1,42 @@
+<div class="records table-responsive">
+  <div class="record-header">
+    <div class="add" *ngIf="addButtonText">
+      <button class="btn btn-primary" (click)="clickAdd()">{{ addButtonText }}</button>
+    </div>
+    <form [formGroup]="searchForm" class="browse">
+      <input class="browse__input" formControlName="value" type="search" placeholder="Search">
+      <select class="browse__select" formControlName="key">
+        <option *ngFor="let header of headers" [value]="header.name">{{ header.title }}</option>
+      </select>
+    </form>
+  </div>
+  <div>
+    <table class="table">
+      <thead class="thead">
+        <tr class="tr">
+          <th class="th" *ngFor="let header of headers">{{ header.title }}</th>
+          <th class="th" *ngIf="tableConfig?.hasOptions"> Actions </th>
+        </tr>
+      </thead>
+      <tbody class="tbody" *ngIf="data">
+        <ng-container
+          *ngIf="(data! | filterList:getValueControl('key'):getValueControl('value')).length > 0; else elseRow">
+          <tr class="tr" *ngFor="let row of (data! | filterList:getValueControl('key'):getValueControl('value'))">
+            <td class="td" *ngFor="let header of headers">{{ row[header.name] }}</td>
+            <td class="td" *ngIf="tableConfig?.hasOptions">
+              <div class="actions">
+                <span *ngIf="tableConfig?.hasView" class="las la-eye" (click)="clickView(row.id)"></span>
+                <span *ngIf="tableConfig?.hasDelete" class="las la-trash" (click)="clickDelete(row.id)"></span>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #elseRow>
+          <tr class="tr">
+            <td class="td">We have no records for your search</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</div>

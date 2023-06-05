@@ -1,0 +1,11 @@
+
+<app-general-table 
+    [addButtonText]="'Add Student'" 
+    [data]="studentsList | async " 
+    [headers]="tableHeader"
+    [tableConfig]="{hasOptions: true, hasDelete: true}"
+    (onClickAdd)="addStudent()"
+    (onClickView)="viewStudent($event)"
+    (onClickDelete)="removeStudent($event)"
+>
+</app-general-table>

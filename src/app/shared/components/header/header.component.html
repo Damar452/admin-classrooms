@@ -1,0 +1,25 @@
+<header [ngClass]="{'header': true, 'sidebar-open': sidebarIsOpen, 'sidebar-closed': !sidebarIsOpen}">
+  <div class="header-content">
+    <label for="menu-toggle">
+      <span class="las la-bars"></span>
+    </label>
+
+    <div class="header-menu">
+
+      <div class="notify-icon">
+        <span class="las la-envelope"></span>
+        <span class="notify">4</span>
+      </div>
+
+      <div class="notify-icon">
+        <span class="las la-bell"></span>
+        <span class="notify">3</span>
+      </div>
+
+      <div class="user">
+        <span class="las la-power-off"></span>
+        <span class="logout">Logout</span>
+      </div>
+    </div>
+  </div>
+</header>

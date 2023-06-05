@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card__head">
+    <h3 class="card__value">{{ value }}</h3>
+    <span class="card__icon" [ngClass]="icon"></span>
+  </div>
+  <div class="card__progress">
+    <small class="card__progress-description">{{ description }}</small>
+    <div class="card-indicator">
+      <div [ngClass]="'indicator ' + color" [ngStyle]="{'width': percentage}"></div>
+    </div>
+  </div>
+</div>

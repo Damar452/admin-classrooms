@@ -1,0 +1,44 @@
+.card {
+  box-shadow: 0px 5px 5px -5px rgb(0 0 0 / 10%);
+  background: var(--color-white);
+  padding: 1rem;
+  border-radius: 3px;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__icon {
+    font-size: 2rem;
+    color: var(--text-grey);
+  }
+
+  &__progress-description {
+    color: var(--text-grey);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  &-indicator {
+    margin: 0.7rem 0rem;
+    height: 10px;
+    border-radius: 4px;
+    background: #e9edf2;
+    overflow: hidden;
+  }
+}
+
+.indicator {
+  height: 10px;
+  border-radius: 4px;
+}
+
+.primary {
+  background: var(--main-color);
+}
+
+.secondary {
+  background: var(--color-blue);
+}

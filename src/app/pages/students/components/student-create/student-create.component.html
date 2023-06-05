@@ -1,0 +1,49 @@
+<h3 class="title">Create Form</h3>
+<hr>
+
+<div class="content">
+
+    <form [formGroup]="createForm" (ngSubmit)="saveStudent()" class="horizontal-form">
+
+        <div class="form-group">
+            <label class="form-group__label" for="name">Name:</label>
+            <input class="form-group__input" type="text" id="name" formControlName="name">
+            <ng-container *ngTemplateOutlet="errorMessage;context:{control:'name'}"></ng-container>
+        </div>
+
+        <div class="form-group">
+            <label class="form-group__label" for="age">Age (years):</label>
+            <input class="form-group__input" type="number" id="age" formControlName="age">
+            <ng-container *ngTemplateOutlet="errorMessage;context:{control:'age'}"></ng-container>
+        </div>
+
+        <div class="form-group">
+            <label class="form-group__label" for="gender">Gender:</label>
+            <select class="form-group__input" id="gender" formControlName="gender">
+                <option disabled value=""> Choose an option </option>
+                <option *ngFor="let gender of genders" [value]="gender"> {{ gender }} </option>
+            </select>
+            <ng-container *ngTemplateOutlet="errorMessage;context:{control:'gender'}"></ng-container>
+        </div>
+
+        <div class="form-group">
+            <label class="form-group__label" for="course">Course:</label>
+            <select class="form-group__input" id="course" formControlName="courseId">
+                <option disabled value=""> Choose an option </option>
+                <option *ngFor="let course of (courses | async)" [value]="course.id"> {{ course.name }} </option>
+            </select>
+            <ng-container *ngTemplateOutlet="errorMessage;context:{control:'courseId'}"></ng-container>
+        </div>
+
+        <div class="form-group form-group--buttons">
+            <button class="btn btn-secondary" [routerLink]="['/courses']">Cancel</button>
+            <button class="btn btn-primary" type="submit" [disabled]="createForm.invalid">Save</button>
+        </div>
+
+    </form>
+
+</div>
+
+<ng-template #errorMessage let-control="control">
+    <small *ngIf="getValidation(control, 'required')" class="text-error">The "{{ control }}" field is required</small>
+</ng-template>

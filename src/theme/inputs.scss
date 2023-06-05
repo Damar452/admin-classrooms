@@ -1,0 +1,60 @@
+
+input,
+button,
+select {
+  outline: none;
+}
+
+input, select {
+  height: 35px;
+  border: 1px solid var(--color-grey);
+  border-radius: 3px;
+  width: 100%;
+  padding: 0rem 0.5rem;
+  color: var(--color-grey);
+}
+
+input:focus{
+  border: 1px solid var(--main-color);
+}
+
+input:invalid {
+  border: 1px solid var(--color-red);
+}
+
+.horizontal-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  
+  &__input {
+    width: 100%
+  }
+
+  &__label {
+    color: var(--text-grey);
+  }
+
+  &--buttons {
+    flex-direction: row;
+    gap: 10px;
+    .btn {
+      width: 100%;
+      margin-top: 15px;
+    }
+  }
+}
+
+.text-error {
+  color: var(--color-red);
+  font-style: italic;
+}
+
