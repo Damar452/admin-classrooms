@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Course } from 'src/app/core/models/bussiness/course.type';
 import { Student } from 'src/app/core/models/bussiness/student.type';
 import { TableHeader } from 'src/app/core/models/table.type';
@@ -12,12 +12,14 @@ import { StudentsService } from 'src/app/core/services/bussiness/students/studen
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.scss']
 })
-export class CourseDetailComponent implements OnInit {
+export class CourseDetailComponent implements OnInit, OnDestroy {
 
   public courseData!: Course | undefined;
   public students!: Observable<Student[]>;
   public tableHeader: TableHeader[] = [];
+  
   private idCourse = this.activatedRoute.snapshot.params['id'];
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,10 +34,12 @@ export class CourseDetailComponent implements OnInit {
   }
 
   private getCourseData() {
-    this.coursesService.getCourseById(Number(this.idCourse)).subscribe(course => {
+    this.coursesService.getCourseById(Number(this.idCourse))
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(course => {
       this.courseData = course;
-      console.log(this.courseData)
-    })
+    });
+
   }
 
   private getStudentsById() {
@@ -44,19 +48,15 @@ export class CourseDetailComponent implements OnInit {
 
   private setTableHeader() {
     this.tableHeader = [
-      {
-        title: 'Name',
-        name: 'name'
-      },
-      {
-        title: 'Age',
-        name: 'age'
-      },
-      {
-        title: 'Gender',
-        name: 'gender'
-      }
+      { title: 'Name', name: 'name'},
+      { title: 'Age', name: 'age'},
+      { title: 'Gender', name: 'gender'}
     ]
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

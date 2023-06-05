@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
 import { AnalyticsCardComponent } from './analytics-card/analytics-card.component';
+import { FooterComponent } from './footer/footer.component';
+import { SubtitleBoxComponent } from './subtitle-box/subtitle-box.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { AnalyticsCardComponent } from './analytics-card/analytics-card.componen
     SidebarComponent,
     GeneralTableComponent,
     AnalyticsCardComponent,
+    FooterComponent,
+    SubtitleBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +30,8 @@ import { AnalyticsCardComponent } from './analytics-card/analytics-card.componen
     SidebarComponent,
     GeneralTableComponent,
     AnalyticsCardComponent,
+    FooterComponent,
+    SubtitleBoxComponent,
   ]
 })
 export class ComponentsModule { }

@@ -14,6 +14,7 @@
     <table class="table">
       <thead class="thead">
         <tr class="tr">
+          <th class="th">No.</th>
           <th class="th" *ngFor="let header of headers">{{ header.title }}</th>
           <th class="th" *ngIf="tableConfig?.hasOptions"> Actions </th>
         </tr>
@@ -21,7 +22,8 @@
       <tbody class="tbody" *ngIf="data">
         <ng-container
           *ngIf="(data! | filterList:getValueControl('key'):getValueControl('value')).length > 0; else elseRow">
-          <tr class="tr" *ngFor="let row of (data! | filterList:getValueControl('key'):getValueControl('value'))">
+          <tr class="tr" *ngFor="let row of (data! | filterList:getValueControl('key'):getValueControl('value')); let i = index">
+            <td  class="td">{{ i + 1 }}</td>
             <td class="td" *ngFor="let header of headers">{{ row[header.name] }}</td>
             <td class="td" *ngIf="tableConfig?.hasOptions">
               <div class="actions">

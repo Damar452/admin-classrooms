@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { genderList } from 'src/app/core/consts/data-select.consts';
 import { Course } from 'src/app/core/models/bussiness/course.type';
 import { Gender } from 'src/app/core/models/bussiness/student.type';
@@ -14,11 +14,12 @@ import { AlertsService } from 'src/app/core/services/utilities/alerts.service';
   templateUrl: './student-create.component.html',
   styleUrls: ['./student-create.component.scss']
 })
-export class StudentCreateComponent implements OnInit {
+export class StudentCreateComponent implements OnInit, OnDestroy {
 
   public createForm!: FormGroup;
   public genders: Gender[] = genderList;
   public courses!: Observable<Course[]>;
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -34,9 +35,11 @@ export class StudentCreateComponent implements OnInit {
   }
 
   public saveStudent(): void {
-    this.studentService.saveStudent(this.createForm.value).subscribe( saved => {
-      if(saved){
-        this.alertService.successAlert('¡Student saved successfully!');
+    this.studentService.saveStudent(this.createForm.value)
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(saved => {
+      if (saved) {
+        this.alertService.notifyAlert('¡Student saved successfully!', 'success');
         this.router.navigate(['/students']);
       }
     });
@@ -59,5 +62,10 @@ export class StudentCreateComponent implements OnInit {
       gender: ['', [Validators.required]],
       courseId: ['', [Validators.required]],
     });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(); //It is terminated since it is not a real http request
+    this.unsubscribe$.complete();
   }
 }

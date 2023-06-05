@@ -1,0 +1,12 @@
+.subtitle-box {
+  display: flex;
+  margin-bottom: 15px;
+  &__title {
+    color: #74767d;
+  }
+  &__arrow {
+    font-size: 25px;
+    margin-right: 15px;
+    color: var(--main-color);
+  }
+}

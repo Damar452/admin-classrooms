@@ -1,25 +1,31 @@
-<header [ngClass]="{'header': true, 'sidebar-open': sidebarIsOpen, 'sidebar-closed': !sidebarIsOpen}">
-  <div class="header-content">
-    <label for="menu-toggle">
-      <span class="las la-bars"></span>
-    </label>
 
-    <div class="header-menu">
-
-      <div class="notify-icon">
-        <span class="las la-envelope"></span>
-        <span class="notify">4</span>
-      </div>
-
-      <div class="notify-icon">
-        <span class="las la-bell"></span>
-        <span class="notify">3</span>
-      </div>
-
-      <div class="user">
-        <span class="las la-power-off"></span>
-        <span class="logout">Logout</span>
+<ng-container *ngIf="isLogged; else elseMenu">
+  <header [ngClass]="{'header': true, 'header--sidebar-open': sidebarIsOpen, 'header--sidebar-closed': !sidebarIsOpen}">
+    <div class="header__content">
+      <label for="menu-toggle">
+        <span class="header__icon las la-bars"></span>
+      </label>
+      <div class="header__menu">
+        <div class="header__notify-icon">
+          <span class="header__icon las la-envelope"></span>
+          <span class="header__notify">4</span>
+        </div>
+        <div class="header__notify-icon">
+          <span class="header__icon las la-bell"></span>
+          <span class="header__notify">3</span>
+        </div>
+        <div class="header__user" (click)="logout()">
+          <span class="header__icon las la-power-off"></span>
+          <span class="header__logout">Logout</span>
+        </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
+</ng-container>
+
+<ng-template #elseMenu>
+  <header class="header--no-logged">
+    <h2>Course Management System</h2>
+  </header>
+</ng-template>
+

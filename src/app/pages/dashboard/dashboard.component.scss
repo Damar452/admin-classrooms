@@ -12,19 +12,19 @@
 .content {
   margin-top: 60px;
   padding: 1.3rem 1rem;
-  background: #f1f4f9;
+  background: var(--soft-background);
   min-height: 100vh;
 }
 
 .childs {
-    background: white;
-    padding: 1rem;
-    border-radius: 3px;
+  background: var(--color-white);
+  padding: 1rem;
+  border-radius: 3px;
 }
 
 .analytics {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
   margin-bottom: 2rem;
 }

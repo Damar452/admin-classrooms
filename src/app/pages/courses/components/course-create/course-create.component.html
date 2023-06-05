@@ -1,5 +1,5 @@
-<h3 class="title">Create Form</h3>
-<hr>
+
+<app-subtitle-box subtitle="Create Form" route="/courses"></app-subtitle-box>
 
 <div class="content">
 
@@ -48,5 +48,5 @@
 </div>
 
 <ng-template #errorMessage let-control="control">
-    <small *ngIf="getValidation(control, 'required')" class="text-error">The "{{ control }}" field is required</small>
+    <small *ngIf="getValidation(control, 'required')" class="text-error">The {{ control | titlecase }} field is required</small>
 </ng-template>

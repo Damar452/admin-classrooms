@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  margin-top: 150px;
+  align-items: center;
+  flex-direction: column;
+  height: 70vh;
+}
+
+.body {
+  border: 1px solid rgb(226, 225, 225);
+  box-shadow: 0 2px 50px rgba(0, 0, 0, 0.1);
+  width: 25%;
+  padding: 30px;
+  border-radius: 3px;
+  &__title-box {
+    text-align: center;
+    &__title {
+      margin-bottom: 15px;
+      color: var(--main-color);
+    }
+    &__subtitle {
+      margin-bottom: 20px;
+      color: var(--color-grey);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .body {
+    width: 80%;
+  }
+}

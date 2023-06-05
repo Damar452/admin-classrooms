@@ -56,7 +56,7 @@
 }
 
 .sidebar__header-title {
-  color: white;
+  color: var(--color-white);
 }
 
 .sidebar__content {
@@ -85,7 +85,7 @@
 }
 
 .sidebar__profile-name {
-  color: #fff;
+  color: var(--color-white);
   font-weight: 500;
 }
 
@@ -109,7 +109,7 @@
 
 .sidebar__menu a.active span,
 .sidebar__menu a.active small {
-  color: #fff;
+  color: var(--color-white);
 }
 
 .sidebar__menu a span {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Course } from 'src/app/core/models/bussiness/course.type';
 import { TableHeader } from 'src/app/core/models/table.type';
 import { CoursesService } from 'src/app/core/services/bussiness/courses/courses.service';
@@ -15,6 +15,8 @@ export class CoursesListComponent implements OnInit {
 
   public coursesList!: Observable<Course[]>;
   public tableHeader: TableHeader[] = [];
+
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private coursesService: CoursesService,
@@ -37,12 +39,14 @@ export class CoursesListComponent implements OnInit {
 
   public async removeCourse(id: number) {
     const { isConfirmed } = await this.alertsService.confirmAlertDelete('Course');
-    isConfirmed && this.coursesService.deleteCourse(id).subscribe( resp => {
-      if(resp) {
-        this.alertsService.successAlert('¡Course successfully deleted!');
-        this.getCourses();
-      }
-    })
+    isConfirmed && this.coursesService.deleteCourse(id)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(resp => {
+        if (resp) {
+          this.alertsService.notifyAlert('¡Course successfully deleted!', 'success');
+          this.getCourses();
+        }
+      });
   }
 
   private getCourses() {
@@ -51,19 +55,15 @@ export class CoursesListComponent implements OnInit {
 
   private setTableHeader() {
     this.tableHeader = [
-      {
-        title: 'Name',
-        name: 'name'
-      },
-      {
-        title: 'Director',
-        name: 'director'
-      },
-      {
-        title: 'Session',
-        name: 'session'
-      }
+      { title: 'Name', name: 'name' },
+      { title: 'Director', name: 'director' },
+      { title: 'Session', name: 'session' }
     ]
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

@@ -1,21 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from './core/services/utilities/local-storage.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  public sidebarOpen: boolean = true;
-
-  constructor(private storageService: LocalStorageService) {}
-
-  ngOnInit(): void {
-    this.storageService.initializeMockData();
-  }
-
- 
+  public sidebarOpen = true;
 
 }

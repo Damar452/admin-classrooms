@@ -1,7 +1,7 @@
 <app-sidebar (onChangeSidebar)="sidebarOpen = $event"></app-sidebar>
 
 <section [ngClass]="{'container': sidebarOpen, 'container-small': !sidebarOpen}">
-  <app-header [sidebarIsOpen]="sidebarOpen"></app-header>
+  <app-header [sidebarIsOpen]="sidebarOpen" [isLogged]="true"></app-header>
   <main class="content">
     <div class="analytics">
       <app-analytics-card [value]="(courses | async )!.length" [percentage]="'30%'" [icon]="'las la-home'"

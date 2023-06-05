@@ -1,43 +1,35 @@
-<h3 class="title">Detail</h3>
-<hr>
+<app-subtitle-box subtitle="Detail" route="/courses"></app-subtitle-box>
 
 <div class="content">
-
-    <div class="information">
-
-        <div class="data">
-            <h4 class="data__title">Name</h4>
-            <h3 class="data__value">{{ courseData?.name }}</h3>
-        </div>
-
-        <div class="data">
-            <h4 class="data__title">Grade</h4>
-            <h3 class="data__value">{{ courseData?.grade }}</h3>
-        </div>
-
-        <div class="data">
-            <h4 class="data__title">Subgroup</h4>
-            <h3 class="data__value">{{ courseData?.subGroup }}</h3>
-        </div>
-
-        <div class="data">
-            <h4 class="data__title">Director</h4>
-            <h3 class="data__value">{{ courseData?.director }}</h3>
-        </div>
-
-        <div class="data">
-            <h4 class="data__title">Session</h4>
-            <h3 class="data__value">{{ courseData?.session }}</h3>
-        </div>
+  <div class="information">
+    <div class="data">
+      <h4 class="data__title">Name</h4>
+      <h3 class="data__value">{{ courseData?.name }}</h3>
     </div>
 
-
-    <div class="students-information">
-        <h3 class="title">Course students</h3>
-        <app-general-table [headers]="tableHeader" [data]="students | async">
-        </app-general-table>
+    <div class="data">
+      <h4 class="data__title">Grade</h4>
+      <h3 class="data__value">{{ courseData?.grade }}</h3>
     </div>
 
-<!-- [data]="coursesList | async " [headers]="tableHeader" -->
+    <div class="data">
+      <h4 class="data__title">Subgroup</h4>
+      <h3 class="data__value">{{ courseData?.subGroup }}</h3>
+    </div>
 
+    <div class="data">
+      <h4 class="data__title">Director</h4>
+      <h3 class="data__value">{{ courseData?.director }}</h3>
+    </div>
+
+    <div class="data">
+      <h4 class="data__title">Session</h4>
+      <h3 class="data__value">{{ courseData?.session }}</h3>
+    </div>
+  </div>
+  <div class="students-information">
+    <h3 class="title">Course students</h3>
+    <app-general-table [headers]="tableHeader" [data]="students | async">
+    </app-general-table>
+  </div>
 </div>

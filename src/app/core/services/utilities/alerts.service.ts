@@ -20,11 +20,11 @@ export class AlertsService {
     });
   }
 
-  public successAlert(title: string) {
+  public notifyAlert(title: string, icon: SweetAlertIcon) {
     return Swal.fire(
       '',
       title,
-      'success'
+      icon
     )
   }
 }
