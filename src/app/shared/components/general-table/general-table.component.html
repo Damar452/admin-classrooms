@@ -28,6 +28,7 @@
             <td class="td" *ngIf="tableConfig?.hasOptions">
               <div class="actions">
                 <span *ngIf="tableConfig?.hasView" class="las la-eye" (click)="clickView(row.id)"></span>
+                <span *ngIf="tableConfig?.hasEdit" class="las la-edit" (click)="clickEdit(row.id)"></span>
                 <span *ngIf="tableConfig?.hasDelete" class="las la-trash" (click)="clickDelete(row.id)"></span>
               </div>
             </td>

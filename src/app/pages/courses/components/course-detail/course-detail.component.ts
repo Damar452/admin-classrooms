@@ -44,6 +44,10 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
 
   private getStudentsById() {
     this.students = this.studentsService.getStudentsByCourseId(Number(this.idCourse));
+
+    this.students.subscribe(resp => {
+      console.log(Number(this.idCourse),resp)
+    })
   }
 
   private setTableHeader() {

@@ -1,7 +1,7 @@
-<app-subtitle-box subtitle="Create Form" route="/students"></app-subtitle-box>
+<app-subtitle-box [subtitle]="(idStudent ? 'Edit' : 'Create') + ' form'" route="/students"></app-subtitle-box>
 
 <div class="content">
-  <form [formGroup]="createForm" (ngSubmit)="saveStudent()" class="horizontal-form">
+  <form [formGroup]="createForm" (ngSubmit)="idStudent ? updateStudent() :saveStudent()" class="horizontal-form">
     <div class="form-group">
       <label class="form-group__label" for="name">Name:</label>
       <input class="form-group__input" type="text" id="name" formControlName="name">
@@ -30,7 +30,7 @@
     </div>
     <div class="form-group form-group--buttons">
       <button class="btn btn-secondary" [routerLink]="['/courses']">Cancel</button>
-      <button class="btn btn-primary" type="submit" [disabled]="createForm.invalid">Save</button>
+      <button class="btn btn-primary" type="submit" [disabled]="createForm.invalid">{{ idStudent ? 'Update' : 'Save' }}</button>
     </div>
   </form>
 </div>

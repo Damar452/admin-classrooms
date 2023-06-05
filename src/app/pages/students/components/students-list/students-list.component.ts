@@ -33,8 +33,8 @@ export class StudentsListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/students/create']);
   }
 
-  public viewStudent(id: number) {
-    this.router.navigate(['/students/detail', id]);
+  public editStudent(id: number) {
+    this.router.navigate(['/students/edit', id]);
   }
 
   public async removeStudent(id: number): Promise<void> {

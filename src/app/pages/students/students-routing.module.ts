@@ -18,6 +18,10 @@ const routes: Routes = [
         component: StudentCreateComponent
       },
       {
+        path: 'edit/:id',
+        component: StudentCreateComponent
+      },
+      {
         path: '**',
         redirectTo: 'list'
       }

@@ -24,8 +24,23 @@ export class StudentsService {
   }
 
   public saveStudent(data: Student): Observable<boolean> {
-    const newStudents = [...this.localData, data];
+    const saveData = { ...data, id: Math.floor(Math.random() * 100) + 1};
+    const newStudents = [...this.localData, saveData];
     this.localStorageService.setData(studentsKey, newStudents);
+    return of(true);
+  }
+
+  public getStudentById(id: number) {
+    const student = this.localData.find( student => student.id === id);
+    return of(student);
+  }
+
+  public updateStudent(data: Student): Observable<boolean> {
+    let updatedArray = this.localData.map( student => {
+      if(student.id === data.id) return {...data};
+      return student;
+    });
+    this.localStorageService.setData(studentsKey, updatedArray);
     return of(true);
   }
 

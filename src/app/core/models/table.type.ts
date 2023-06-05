@@ -6,6 +6,7 @@ export type TableHeader = {
 
 export type TableConfig = {
     hasView?: boolean;
+    hasEdit?: boolean;
     hasDelete?: boolean;
     hasOptions?: boolean;
 }

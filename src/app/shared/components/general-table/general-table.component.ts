@@ -17,6 +17,7 @@ export class GeneralTableComponent implements OnInit {
 
   @Output() onClickAdd: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() onClickView: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onClickEdit: EventEmitter<number> = new EventEmitter<number>();
   @Output() onClickDelete: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private fb: FormBuilder){}
@@ -31,6 +32,10 @@ export class GeneralTableComponent implements OnInit {
 
   public clickView(id: number) {
     this.onClickView.emit(id);
+  }
+
+  public clickEdit(id: number) {
+    this.onClickEdit.emit(id);
   }
 
   public clickDelete(id: number) {

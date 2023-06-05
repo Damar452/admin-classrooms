@@ -25,7 +25,7 @@ export class CourseCreateComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private coursesService: CoursesService,
     private router: Router,
-    private alertService: AlertsService
+    private alertService: AlertsService,
   ) { }
 
   ngOnInit(): void {

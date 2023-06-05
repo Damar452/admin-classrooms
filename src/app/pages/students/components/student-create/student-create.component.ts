@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { genderList } from 'src/app/core/consts/data-select.consts';
 import { Course } from 'src/app/core/models/bussiness/course.type';
@@ -19,6 +19,7 @@ export class StudentCreateComponent implements OnInit, OnDestroy {
   public createForm!: FormGroup;
   public genders: Gender[] = genderList;
   public courses!: Observable<Course[]>;
+  public idStudent = this.activatedRoute.snapshot.params['id'];
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -26,29 +27,52 @@ export class StudentCreateComponent implements OnInit, OnDestroy {
     private coursesService: CoursesService,
     private studentService: StudentsService,
     private router: Router,
-    private alertService: AlertsService
+    private alertService: AlertsService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.getCourses();
     this.initializeCreateForm();
+    this.idStudent && this.getStudent();
   }
 
   public saveStudent(): void {
-    this.studentService.saveStudent(this.createForm.value)
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(saved => {
-      if (saved) {
-        this.alertService.notifyAlert('¡Student saved successfully!', 'success');
-        this.router.navigate(['/students']);
-      }
-    });
+    const form = this.createForm.value;
+    this.studentService.saveStudent({ ...form, courseId: Number(form.courseId) })
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(saved => {
+        saved && this.alertRedirect('¡Student saved successfully!')
+      });
+  }
+
+  public updateStudent(): void {
+    const form = this.createForm.value;
+    this.studentService.updateStudent({ ...form, courseId: Number(form.courseId) })
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(saved => {
+        saved && this.alertRedirect('¡Student updated successfully!')
+      });
+  }
+
+  private alertRedirect(alertText: string) {
+    this.alertService.notifyAlert(alertText, 'success');
+    this.router.navigate(['/students']);
   }
 
   public getValidation(controlName: string, validator: string): boolean | undefined {
     const control = this.createForm.get(controlName);
     return control?.touched && control.hasError(validator);
   }
+
+  private getStudent() {
+    this.studentService.getStudentById(Number(this.idStudent))
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((student) => {
+        this.createForm.patchValue(student!);
+      });
+  }
+
 
   private getCourses(): void {
     this.courses = this.coursesService.getCourses();
@@ -60,7 +84,7 @@ export class StudentCreateComponent implements OnInit, OnDestroy {
       name: ['', [Validators.required]],
       age: ['', [Validators.required]],
       gender: ['', [Validators.required]],
-      courseId: ['', [Validators.required]],
+      courseId: [undefined, [Validators.required]],
     });
   }
 
