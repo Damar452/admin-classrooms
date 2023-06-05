@@ -1,3 +1,11 @@
+# Data Log in
+
+Email: admin@gmail.com
+Password: admin
+
+Email: cesar@gmail.com
+Password: 12345678
+
 # AdminClassrooms
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
